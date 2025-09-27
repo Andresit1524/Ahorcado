@@ -1,0 +1,36 @@
+# === Archivos y carpetas generadas por NetBeans ===
+nbproject/private/
+build/
+dist/
+
+# Si usas NetBeans con Maven:
+target/
+
+# Si usas NetBeans con Gradle:
+.gradle/
+build/
+
+# === Archivos de compilación de Java ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Archivos de configuración de IDE que no deben compartirse ===
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+
+# === Archivos de sistema comunes ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# === Archivos temporales ===
+*.log
+*.tmp
+*.bak
+*.backup
