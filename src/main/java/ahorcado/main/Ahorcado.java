@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * letras usadas.
  *
  * @author Hayran Andrés López González
- * @version 1.3.1
+ * @version 1.3.1.1
  */
 public class Ahorcado {
     Random r = new Random();
@@ -135,7 +135,8 @@ public class Ahorcado {
     }
 
     /**
-     * Contiene la lógica para ejecutar una única partida del ahorcado. El bucle se interrumpe cuando el jugador gana o pierde.
+     * Contiene la lógica para ejecutar una única partida del ahorcado. El bucle se
+     * interrumpe cuando el jugador gana o pierde.
      * 
      * Nota: el uso de break como forma de salir del 'while (true)' permite mejoras
      * en el tamaño del código y a la lógica del mismo al gestionar directamente las
@@ -204,7 +205,7 @@ public class Ahorcado {
             play();
 
             // Exige al jugador una respuesta entre si o no (s/n)
-            System.out.println("\n¿Quieres jugar de nuevo? (s/n)");
+            System.out.printf("\n¿Quieres jugar de nuevo? (s/n)\n> ");
             char choice = ' ';
 
             while (choice != 's' && choice != 'n') {
