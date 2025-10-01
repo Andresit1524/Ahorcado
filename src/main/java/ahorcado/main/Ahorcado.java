@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Hayran Andrés López González
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 public class Ahorcado {
@@ -29,9 +29,9 @@ public class Ahorcado {
 
     // Constructor
     public Ahorcado() {
-        this.word = wordsArray[r.nextInt(wordsArray.length)];
-        this.usedLetters = new ArrayList<Character>();
-        this.currErrors = 0;
+        word = wordsArray[r.nextInt(wordsArray.length)];
+        usedLetters = new ArrayList<Character>();
+        currErrors = 0;
     }
 
     /**
@@ -58,19 +58,19 @@ public class Ahorcado {
         String finalWord = "";
 
         // Recorre por cada letra de la palabra
-        for (int i = 0; i < this.word.length(); i++) {
-            char letter = this.word.charAt(i);
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
 
             // Si la letra está en la lista, la añade a la palabra final y se sale del bucle
             // Si no se encontró la letra, pone una barra baja
-            if (this.usedLetters.contains(letter)) {
+            if (usedLetters.contains(letter)) {
                 finalWord += letter + " ";
             } else {
                 finalWord += "_ ";
             }
 
             // Alternativa con operador ternario ?:
-            // finalWord += this.usedLetters.contains(letter) ? letter + " " : "_ ";
+            // finalWord += usedLetters.contains(letter) ? letter + " " : "_ ";
         }
 
         return finalWord;
@@ -82,12 +82,12 @@ public class Ahorcado {
      */
     private int checkChar(char letter) {
         // Verifica que la letra fue usada ya y retorna 0 en ese caso
-        if (this.usedLetters.contains(letter)) {
+        if (usedLetters.contains(letter)) {
             return 0;
         }
 
         // Si no, busca en la palabra a por la letra y retorna 1 si la encuentra
-        if (this.word.contains(String.valueOf(letter))) {
+        if (word.contains(String.valueOf(letter))) {
             return 1;
         }
 
@@ -101,8 +101,8 @@ public class Ahorcado {
     private String usedLettersString() {
         String finalString = "";
 
-        for (int i = 0; i < this.usedLetters.size(); i++) {
-            finalString += this.usedLetters.get(i);
+        for (int i = 0; i < usedLetters.size(); i++) {
+            finalString += usedLetters.get(i);
         }
 
         return finalString;
@@ -128,7 +128,7 @@ public class Ahorcado {
                 // Letra correcta: añade la letra como usada
                 case 1:
                     System.out.println("Letra correcta");
-                    this.usedLetters.add(letter);
+                    usedLetters.add(letter);
                     break;
                 // Letra ya evaluada antes
                 case 0:
@@ -138,19 +138,19 @@ public class Ahorcado {
                 case -1:
                     currErrors++;
                     System.out.printf("Letra incorrecta. Te quedan %d intentos\n", MAX_ERRORS - currErrors);
-                    this.usedLetters.add(letter);
+                    usedLetters.add(letter);
                     break;
             }
 
             // Si llegamos al límite de errores, perdemos
             if (currErrors == MAX_ERRORS) {
-                System.out.printf("\n> %s ¡Haz perdido! la palabra era: %s <\n", HANGMAN_STRING, this.word);
+                System.out.printf("\n> %s ¡Haz perdido! la palabra era: %s <\n", HANGMAN_STRING, word);
                 break;
             }
 
             // Si la palabra (sin los espacios añadidos) coincide con la adivinada, ganamos
-            if (drawWord().replace(" ", "").equals(this.word)) {
-                System.out.printf("\n> ¡Haz ganado! la palabra es: %s <\n", this.word);
+            if (drawWord().replace(" ", "").equals(word)) {
+                System.out.printf("\n> ¡Haz ganado! la palabra es: %s <\n", word);
                 break;
             }
         }
@@ -160,9 +160,9 @@ public class Ahorcado {
      * Resetea los valores del juego a su estado original para empezar otra vez
      */
     private void reset() {
-        this.usedLetters.clear();
-        this.currErrors = 0;
-        this.word = wordsArray[r.nextInt(wordsArray.length)];
+        usedLetters.clear();
+        currErrors = 0;
+        word = wordsArray[r.nextInt(wordsArray.length)];
     }
 
     /**
