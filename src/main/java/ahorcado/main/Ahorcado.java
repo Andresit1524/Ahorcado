@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Hayran Andrés López González
- * @version 1.2.2
+ * @version 1.3
  */
 
 public class Ahorcado {
@@ -96,6 +96,34 @@ public class Ahorcado {
     }
 
     /**
+     * Obtiene un y solo un caracter del usuario para el juego, filtrando entradas
+     * no válidas. Las entradas no válidas incluyen números, simbolos o más de un
+     * carácter.
+     */
+    private char getUserChar() {
+        // Repite hasta que el usuario ingrese una única letra válida
+        while (true) {
+            System.out.println("Ingresa una letra");
+            String gottenChars = s.next().toLowerCase();
+
+            // Verifica que la entrada no esté vacía y tenga un solo carácter
+            if (gottenChars.length() != 1) {
+                System.out.println("Escribe un solo caracter\n");
+                continue; // Salta al inicio del bucle
+            }
+
+            char userChar = gottenChars.charAt(0);
+
+            // Verifica que el carácter sea una letra
+            if (Character.isLetter(userChar)) {
+                return userChar; // La entrada es válida, retorna el carácter
+            } else {
+                System.out.println("Entrada no válida. Solo se admiten letras\n");
+            }
+        }
+    }
+
+    /**
      * Devuelve la lista de letras usadas en el orden en el que se usaron
      */
     private String usedLettersString() {
@@ -117,10 +145,9 @@ public class Ahorcado {
             // Dibuja la palabra actual, el ahorcado y las letras usadas
             System.out.printf("\n%s\t%s\t%s\n", drawWord(),
                     drawHangman(currErrors), usedLettersString());
-            System.out.println("Ingresa una letra");
 
             // Letra elegida por el usuario
-            char letter = s.next().toLowerCase().charAt(0);
+            char letter = getUserChar();
 
             // Verifica la letra y reacciona dependiendo del caso
             int checkResult = checkChar(letter);
