@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Hayran Andrés López González
- * @version 1.2
+ * @version 1.2.1
  */
 
 public class Ahorcado {
@@ -25,7 +25,7 @@ public class Ahorcado {
     // Atributos de instancia
     private String word; // Palabra a adivinar
     private ArrayList<Character> usedLetters; // Lista de letras usadas
-    private int currErrors;// Cantidad de errores actuales
+    private int currErrors; // Cantidad de errores actuales
 
     // Constructor
     public Ahorcado() {
@@ -38,7 +38,7 @@ public class Ahorcado {
      * Dibuja la figura del ahorcado en función del número de errores cometidos y la
      * cantidad máxima de errores permitidos
      */
-    public String drawHangman(int errorCount) {
+    private String drawHangman(int errorCount) {
         // Calcula la proporción de la figura a dibujar basándose en los intentos
         int charsToDraw = (int) ((double) errorCount / Ahorcado.MAX_ERRORS * Ahorcado.HANGMAN_STRING.length());
 
@@ -51,11 +51,10 @@ public class Ahorcado {
     /**
      * Dibuja la palabra en función de la lista de letras usadas. La lista también
      * incluye letras que son elecciones incorrectas. El truco para que funcione
-     * esta verificación, entonces, está en que esas letras no están en la palabra
-     * (por eso son incorrectas) y por ende pasan derecho el test sin afectar el
-     * resultado
+     * esta función, entonces, está en que esas letras no están en la palabra (por
+     * eso son incorrectas) y por ende pasan derecho sin afectar el resultado
      */
-    public String drawWord() {
+    private String drawWord() {
         String finalWord = "";
 
         // Recorre por cada letra de la palabra
@@ -81,7 +80,7 @@ public class Ahorcado {
      * Verifica que la letra elegida esté en la palabra y no haya sido usada antes.
      * Res => 1: letra correcta, 0: letra ya evaluada antes, -1: letra incorrecta
      */
-    public int checkChar(char letter) {
+    private int checkChar(char letter) {
         // Verifica que la letra fue usada ya y retorna 0 en ese caso
         if (this.usedLetters.contains(letter)) {
             return 0;
@@ -97,9 +96,9 @@ public class Ahorcado {
     }
 
     /**
-     * Imprime la lista de letras usadas en el orden en el que se usaron
+     * Devuelve la lista de letras usadas en el orden en el que se usaron
      */
-    public String printUsedLetters() {
+    private String usedLettersString() {
         String finalString = "";
 
         for (int i = 0; i < this.usedLetters.size(); i++) {
@@ -112,15 +111,15 @@ public class Ahorcado {
     /**
      * Juega una única partida de ahorcado
      */
-    public void play() {
-        // Repite hasta que no ganemos o perdamos
+    private void play() {
+        // Repite hasta que ganemos o perdamos (ver los 'break') más abajo
         while (true) {
-            // Dibuja la palabra actual y el ahorcado
+            // Dibuja la palabra actual, el ahorcado y las letras usadas
             System.out.printf("\n%s\t%s\t%s\n", drawWord(),
-                    drawHangman(currErrors), printUsedLetters());
+                    drawHangman(currErrors), usedLettersString());
             System.out.println("Ingresa una letra");
 
-            // Letra elegida
+            // Letra elegida por el usuario
             char letter = s.next().toLowerCase().charAt(0);
 
             // Verifica la letra y reacciona dependiendo del caso
@@ -160,7 +159,7 @@ public class Ahorcado {
     /**
      * Resetea los valores del juego a su estado original para empezar otra vez
      */
-    public void reset() {
+    private void reset() {
         this.usedLetters.clear();
         this.currErrors = 0;
         this.word = wordsArray[r.nextInt(wordsArray.length)];
