@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * letras usadas.
  *
  * @author Hayran Andrés López González
- * @version 1.3.1.1
+ * @version 1.3.2
  */
 public class Ahorcado {
     Random r = new Random();
@@ -31,17 +31,6 @@ public class Ahorcado {
         word = wordsArray[r.nextInt(wordsArray.length)];
         usedLetters = new ArrayList<Character>();
         currErrors = 0;
-    }
-
-    /**
-     * Dibuja la figura del ahorcado en función del número de errores cometidos y la
-     * cantidad máxima de errores permitidos.
-     */
-    private String drawHangman(int errorCount) {
-        // Calcula la proporción de la figura a dibujar basándose en los errores
-        int charsToDraw = (int) ((double) errorCount / Ahorcado.MAX_ERRORS * Ahorcado.HANGMAN_STRING.length());
-
-        return Ahorcado.HANGMAN_STRING.substring(0, charsToDraw);
     }
 
     /**
@@ -76,22 +65,27 @@ public class Ahorcado {
     }
 
     /**
-     * Verifica que la letra elegida esté en la palabra y no haya sido usada antes.
-     * 
-     * 1: letra correcta.
-     * 0: letra ya evaluada antes.
-     * -1: letra incorrecta.
+     * Dibuja la figura del ahorcado en función del número de errores cometidos y la
+     * cantidad máxima de errores permitidos.
      */
-    private int checkChar(char letter) {
-        if (usedLetters.contains(letter)) {
-            return 0;
+    private String drawHangman(int errorCount) {
+        // Calcula la proporción de la figura a dibujar basándose en los errores
+        int charsToDraw = (int) ((double) errorCount / Ahorcado.MAX_ERRORS * Ahorcado.HANGMAN_STRING.length());
+
+        return Ahorcado.HANGMAN_STRING.substring(0, charsToDraw);
+    }
+
+    /**
+     * Convierte la lista de letras usadas en una cadena.
+     */
+    private String usedLettersString() {
+        String finalString = "";
+
+        for (int i = 0; i < usedLetters.size(); i++) {
+            finalString += usedLetters.get(i);
         }
 
-        if (word.contains(String.valueOf(letter))) {
-            return 1;
-        }
-
-        return -1;
+        return finalString;
     }
 
     /**
@@ -122,16 +116,22 @@ public class Ahorcado {
     }
 
     /**
-     * Convierte la lista de letras usadas en una cadena.
+     * Verifica que la letra elegida esté en la palabra y no haya sido usada antes.
+     * 
+     * 1: letra correcta.
+     * 0: letra ya evaluada antes.
+     * -1: letra incorrecta.
      */
-    private String usedLettersString() {
-        String finalString = "";
-
-        for (int i = 0; i < usedLetters.size(); i++) {
-            finalString += usedLetters.get(i);
+    private int checkChar(char letter) {
+        if (usedLetters.contains(letter)) {
+            return 0;
         }
 
-        return finalString;
+        if (word.contains(String.valueOf(letter))) {
+            return 1;
+        }
+
+        return -1;
     }
 
     /**
