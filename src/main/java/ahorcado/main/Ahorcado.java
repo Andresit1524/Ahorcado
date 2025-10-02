@@ -1,3 +1,4 @@
+// Para funcionar fuera del proyecto de NetBeans, comenta o borra esta línea
 package ahorcado.main;
 
 import java.util.Random;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * letras usadas.
  *
  * @author Hayran Andrés López González
- * @version 1.3.2
+ * @version 1.3.2.1
  */
 public class Ahorcado {
     Random r = new Random();
