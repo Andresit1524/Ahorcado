@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * letras usadas.
  *
  * @author Hayran Andrés López González
- * @version 1.3.2.1
+ * @version 1.3.3
  */
 public class Ahorcado {
     Random r = new Random();
@@ -146,7 +146,8 @@ public class Ahorcado {
     private void play() {
         // Repite hasta que ganemos o perdamos (ver la nota arriba)
         while (true) {
-            System.out.printf("\n%s\t%s\t%s\n", drawWord(), drawHangman(currErrors), usedLettersString());
+            System.out.printf("\n%s\t%s\tLetras usadas: %s\n", drawWord(), drawHangman(currErrors),
+                    usedLettersString());
 
             // Recibe la letra del usuario y la valida
             char letter = getUserChar();
@@ -198,6 +199,7 @@ public class Ahorcado {
         System.out.println("--------------------------------------");
         System.out.println("> ¡Bienvenido al juego del ahorcado! <");
         System.out.println("--------------------------------------");
+        System.out.printf("> Tienes %d intentos para acertar la palabra\n", MAX_ERRORS);
 
         boolean repeat = true;
 
